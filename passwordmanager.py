@@ -26,10 +26,10 @@ def savepassword(website, password, name):
 
 def main():
     dir_ = os.getcwd() + "\\" + passfolder
-    what2to = easygui.enterbox("'store' OR 'get' OR 'remove'  (cancel to exit)")
+    what2to = easygui.enterbox("'store' OR 'get' OR 'remove' OR 'list'  (cancel to exit)")
 
     while what2to == "":
-        what2to = easygui.enterbox("'store' OR 'get' OR 'remove'  (cancel to exit)")
+        what2to = easygui.enterbox("'store' OR 'get' OR 'remove' OR 'list'  (cancel to exit)")
 
     if what2to == "store":
 
@@ -119,6 +119,19 @@ def main():
             easygui.msgbox("Incorrect password.")
             main()
 
+    elif what2to == "list":
+        password = easygui.enterbox("Enter admin password")
+
+        if password == adminpass:
+            filearray = []
+            for file in glob.glob(dir_ + "\\*"):
+                newfile = file.replace(dir_, "")
+                newfile = newfile.replace("\\", "")
+
+                filearray.append(newfile.replace("{", ""))
+
+            easygui.msgbox(filearray)
+
     elif what2to == "cancel":
         sys.exit()
 
@@ -128,6 +141,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
